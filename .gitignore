@@ -1,0 +1,50 @@
+# ROS build artifacts
+build/
+install/
+log/
+dd_gazebo_ws/build/
+dd_gazebo_ws/install/
+dd_gazebo_ws/log/
+
+# Node.js
+node_modules/
+.pnpm-store/
+dist/
+.solid/
+.output/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+
+# C++
+*.o
+*.exe
+*.out
+*.app
+
+# Git LFS
+*.dae filter=lfs diff=lfs merge=lfs -text
+*.gltf filter=lfs diff=lfs merge=lfs -text
+*.stl filter=lfs diff=lfs merge=lfs -text
+
+# Environment files
+.env
+.env.local
+.env.*.local
