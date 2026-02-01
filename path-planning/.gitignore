@@ -1,0 +1,10 @@
+# Do not track build files
+*.exe
+build/*
+
+# Do not track IDE files
+.vscode/
+.vscode/*
+
+# Do not track mid-edit files
+*.swp
