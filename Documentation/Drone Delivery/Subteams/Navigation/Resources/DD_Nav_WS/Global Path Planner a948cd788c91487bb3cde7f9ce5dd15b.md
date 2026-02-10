@@ -1,0 +1,3 @@
+# Global Path Planner
+
+The chosen global path planner for the drone is the SMAC Lattice planner because …

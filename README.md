@@ -2,6 +2,10 @@
 
 This is the unified monorepo for Purdue's Autonomous Robotics Club (ARC) Drone Delivery project. All drone delivery subsystems have been consolidated here for easier development and collaboration.
 
+## 📄 Documentation
+
+Please refer to the `Documentation` folder for project docs, guides, and technical references.
+
 ## 📁 Repository Structure
 
 ```
@@ -152,7 +156,3 @@ The following large files are stored in Git LFS and were **not** included in the
 - [ROS 2 Documentation](https://docs.ros.org/en/humble/)
 - [PX4 Autopilot](https://px4.io/)
 - [Gazebo Simulation](https://gazebosim.org/)
-
-## 📧 Contact
-
-For questions or issues, contact the ARC Drone Delivery team or open an issue in this repository.
