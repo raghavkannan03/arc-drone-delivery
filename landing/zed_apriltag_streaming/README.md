@@ -67,6 +67,13 @@ cd arc-drone-delivery/streaming
 
 #### Option B — Manual GStreamer
 
+> **Encoder note:** on some Jetson/NVIDIA versions the hardware
+> `omxh264enc` element is broken or missing.  If you hit errors or see a
+> blank stream, replace it with the software `x264enc` shown in the second
+> pipeline below.  The example commands are written with `omxh264enc` for
+> historical reasons but `x264enc` is the reliable default on our
+> machines.
+
 ```bash
 gst-launch-1.0 zedsrc ! \
 video/x-raw,width=1280,height=720,framerate=15/1 ! \
@@ -74,7 +81,7 @@ omxh264enc ! rtph264pay ! \
 udpsink host=<LAPTOP_IP> port=5000
 ```
 
-or:
+or (software encoder fallback):
 ```bash
 gst-launch-1.0 -v \
   zedsrc ! \
@@ -105,6 +112,12 @@ cd zed_apriltag_streaming
 ./scripts/setup_ubuntu.sh
 ./scripts/build.sh
 ```
+
+> **Note:** if you move the repository or rebase the source tree, the build
+> directory may contain an outdated `CMakeCache.txt` pointing at the old path.
+> In that case either delete `build/` manually or simply rerun
+> `./scripts/build.sh` (it now auto-detects a mismatched cache and removes the
+> directory for you).
 
 ---
 
@@ -141,6 +154,59 @@ Recommended:
 - Same subnet
 - No VPN
 - 5GHz WiFi or Ethernet
+
+
+## Troubleshooting “stream does not open”
+
+If `zed_apriltag` prints
+
+```
+Failed to open input.
+Tried OpenCV+GStreamer pipeline:
+  <pipeline string>
+```
+or the display window never shows any frames, the problem is almost
+always a networking/stream issue. Common checks:
+
+1. **Verify the RTP stream locally on the laptop.**
+   Run the `gst-launch` command that the binary suggests:
+   ```bash
+   gst-launch-1.0 udpsrc port=5000 \
+     caps="application/x-rtp,media=video,encoding-name=H264,payload=96" ! \
+     rtph264depay ! avdec_h264 ! videoconvert ! autovideosink
+   ```
+   If this shows video you know the stream is reaching the laptop and
+   OpenCV/GStreamer should be able to open it as well.
+
+2. **Check that the Jetson is actually streaming.**
+   On the Jetson run:
+   ```bash
+   gst-launch-1.0 zedsrc ! h4enc ! rtph264pay ! \
+     udpsink host=<LAPTOP_IP> port=5000
+   ```
+   and watch `tcpdump -n -i any port 5000` on the laptop – you should see
+   UDP packets arriving.
+
+3. **Firewall/port blocking.**
+   `sudo ufw status` and make sure UDP 5000 is allowed.
+
+4. **Network path.**
+   Both machines must be on the same layer‑2 network; avoid VPNs or
+   routers that drop multicast/UDP.  Ping and `arp -n` should show the
+   Jetson’s address.
+
+5. **Alternate sources.**
+   If you need to debug without networking you can use the webcam or a
+   recorded video file (see §6) to confirm that the binary itself is
+   functioning.
+
+6. **Pipeline sanity.**
+   If you’ve customised the GStreamer string, make sure it matches the
+   syntax in `src/zed_gst_pipeline.cpp`.  Typos there will cause
+   `cap.isOpened()` to fail silently.
+
+Once the underlying stream is reachable, `./build/zed_apriltag --port 5000`
+should open a window and start detecting tags.
 
 ---
 
