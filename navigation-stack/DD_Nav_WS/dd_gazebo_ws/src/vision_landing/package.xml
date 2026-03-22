@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>vision_landing</name>
+  <version>0.0.1</version>
+  <description>AprilTag precision landing pipeline</description>
+  <maintainer email="arc@purdue.edu">ARC</maintainer>
+  <license>MIT</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>rclcpp</depend>
+  <depend>sensor_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>cv_bridge</depend>
+  <depend>image_transport</depend>
+  <depend>tf2_ros</depend>
+  <depend>vision_msgs</depend>
+  <depend>px4_msgs</depend>
+  <depend>std_msgs</depend>
+</package>
