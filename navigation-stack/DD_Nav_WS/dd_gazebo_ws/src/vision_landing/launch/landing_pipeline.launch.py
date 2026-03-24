@@ -21,10 +21,16 @@ def generate_launch_description():
             name='landing_controller',
             output='screen'
         ),
-	Node(
-	    package='vision_landing',
-	    executable='mission_controller',
-	    name='landing_controler',
-	    output='screen'
-	)
+        Node(
+            package='vision_landing',
+            executable='mission_controller',
+            name='mission_controller',
+            output='screen'
+        ),
+        Node(
+            package='vision_landing',
+            executable='vio_node',
+            name='vio_node',
+            output='screen'
+        ),
     ])

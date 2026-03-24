@@ -51,6 +51,10 @@ add_executable(zed_apriltag
 target_include_directories(zed_apriltag PRIVATE ${OpenCV_INCLUDE_DIRS})
 
 target_link_libraries(zed_apriltag PRIVATE apriltag ${OpenCV_LIBS})
+set_target_properties(zed_apriltag PROPERTIES
+  BUILD_RPATH "\$ORIGIN/apriltag_build"
+  INSTALL_RPATH "\$ORIGIN/apriltag_build"
+)
 
 # enable warnings once the target exists
 include(cmake/CompilerWarnings.cmake)
