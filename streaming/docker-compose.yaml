@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  mediamtx:
+    # Uses the specified image version
+    image: bluenviron/mediamtx:1
+    
+    # Give the container a friendly name
+    container_name: mediamtx
+    
+    # Ensure the container restarts automatically unless manually stopped
+    restart: unless-stopped
+    
+    # Translate the -p flags to the ports section
+    ports:
+      # TCP Ports
+      - "8554:8554"  # RTSP/RTMP/HLS/WebRTC (Main port)
+      - "1935:1935"  # RTMP/RTMPS
+      - "8888:8888"  # HTTP/HTTPS API & Web UI
+      - "8889:8889"  # WebRTC (TCP)
+      
+      # UDP Ports (required for some protocols like WebRTC and RTSP/RTP)
+      - "8890:8890/udp" # RTSP/RTP/RTCP (UDP)
+      - "8189:8189/udp" # WebRTC (UDP)
+    
+    # Translate the -e flags to the environment section
+    environment:
+      # Use 'tcp' for RTSP transports as requested
+      - MTX_RTSPTRANSPORTS=tcp
+      
+      # IMPORTANT: Replace 192.168.x.x with the actual host IP or domain for WebRTC to function correctly.
+      - MTX_WEBRTCADDITIONALHOSTS=192.168.x.x
+      
+    # Optional: If you want to use a custom configuration file, 
+    # uncomment the lines below and adjust the path.
+    # volumes:
+    #   - ./mediamtx.yml:/mediamtx.yml
+    # command: ["/usr/bin/mediamtx", "/mediamtx.yml"]
