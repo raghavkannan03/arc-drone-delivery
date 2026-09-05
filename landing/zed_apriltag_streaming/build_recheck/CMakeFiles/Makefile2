@@ -180,8 +180,8 @@ apriltag_build/CMakeFiles/apriltag_py_docstrings.dir/clean:
 # Target rules for target apriltag_build/CMakeFiles/apriltag.cpython-310-x86_64-linux-gnu.dir
 
 # All Build rule for target.
-apriltag_build/CMakeFiles/apriltag.cpython-310-x86_64-linux-gnu.dir/all: apriltag_build/CMakeFiles/apriltag_py_docstrings.dir/all
 apriltag_build/CMakeFiles/apriltag.cpython-310-x86_64-linux-gnu.dir/all: apriltag_build/CMakeFiles/apriltag.dir/all
+apriltag_build/CMakeFiles/apriltag.cpython-310-x86_64-linux-gnu.dir/all: apriltag_build/CMakeFiles/apriltag_py_docstrings.dir/all
 	$(MAKE) $(MAKESILENT) -f apriltag_build/CMakeFiles/apriltag.cpython-310-x86_64-linux-gnu.dir/build.make apriltag_build/CMakeFiles/apriltag.cpython-310-x86_64-linux-gnu.dir/depend
 	$(MAKE) $(MAKESILENT) -f apriltag_build/CMakeFiles/apriltag.cpython-310-x86_64-linux-gnu.dir/build.make apriltag_build/CMakeFiles/apriltag.cpython-310-x86_64-linux-gnu.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/raghav/Documents/arc-drone-delivery/landing/zed_apriltag_streaming/build_recheck/CMakeFiles --progress-num=35,36 "Built target apriltag.cpython-310-x86_64-linux-gnu"

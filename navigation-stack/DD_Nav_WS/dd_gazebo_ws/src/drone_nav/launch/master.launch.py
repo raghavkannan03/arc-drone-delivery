@@ -26,7 +26,7 @@ def generate_launch_description():
         executable='relay',
         name='camera_relay',
         parameters=[{
-            'input_topic': '/gazebo/apriltag_world/typhoon_h480/cgo3_camera_link/camera/image',
+            'input_topic': '/camera/image_raw',
             'output_topic': '/zed/zed_node/rgb/image_rect_color',
         }]
     )
