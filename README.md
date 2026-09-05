@@ -10,7 +10,12 @@ Please refer to the `Documentation` folder for project docs, guides, and technic
 
 ```
 arc-drone-delivery/
-├── navigation-stack/     # Core ROS 2 Navigation Workspace (DD_Nav_WS)
+├── navigation-stack/     # Core ROS 2 Navigation Workspace (DD_Nav_WS) + PX4 Gazebo simulation
+│   ├── ROS2_PX4_Offboard_Example/  # PX4 offboard velocity & navigation control
+│   ├── config/                     # SLAM toolbox + Nav2 config YAMLs
+│   ├── simple_odometry/            # Odometry TF publisher for PX4
+│   ├── default.sdf                 # Gazebo world file
+│   └── model.sdf                   # Drone model file
 ├── onboarding/           # Tutorial and onboarding materials
 ├── avoidance-viz/        # Obstacle avoidance visualization tool
 ├── path-planning/        # Path planning and SLAM algorithms
@@ -27,6 +32,19 @@ Each subdirectory contains its own README with specific setup instructions. Here
 **Path**: `navigation-stack/`  
 **Purpose**: Core ROS 2 workspace for drone navigation, PX4 integration, and Gazebo simulation  
 **Key Features**: GPS global mapping, Nav2 implementation, PX4 flight controller integration  
+**Setup**: See [navigation-stack/README.md](navigation-stack/README.md)
+
+### Drone Delivery Simulation
+**Path**: `navigation-stack/` (simulation packages)  
+**Purpose**: ROS2 PX4 Gazebo Harmonic simulation with SLAM-based mapping and Nav2 autonomous navigation  
+**Key Features**: Drone SLAM mapping, goal-based navigation via RViz2, LiDAR bridge, odometry TF publishing  
+**Prerequisites**: ROS2 Humble, Gazebo Harmonic, PX4 Autopilot  
+**Packages**:
+- `ROS2_PX4_Offboard_Example/` — offboard velocity and navigation control
+- `simple_odometry/` — odometry and TF publisher
+- `config/` — SLAM toolbox and Nav2 parameter files
+- `default.sdf` / `model.sdf` — Gazebo world and drone model  
+
 **Setup**: See [navigation-stack/README.md](navigation-stack/README.md)
 
 ### Onboarding
@@ -88,7 +106,8 @@ These tools are invaluable for:
 ## 🛠️ Development Workflow
 
 ### Prerequisites
-- **ROS 2 Humble** (for navigation-stack, onboarding)
+- **ROS 2 Humble** (for navigation-stack, onboarding, simulation)
+- **Gazebo Harmonic** (for simulation)
 - **Ubuntu 22.04** (recommended for ROS components)
 - **Node.js** (for operations-website)
 - **Python 3** (for various scripts)
@@ -123,6 +142,7 @@ This monorepo was created on **February 1, 2026** by consolidating 7 individual 
 - [`DD-obstacle-avoidance`](https://github.com/purdue-arc/DD-obstacle-avoidance) → `obstacle-avoidance/`
 - [`dd-octree_generator`](https://github.com/purdue-arc/dd-octree_generator) → `octree-generator/`
 - [`drone-delivery-website`](https://github.com/purdue-arc/drone-delivery-website) → `operations-website/`
+- [`DroneDeliverySim`](https://github.com/Ymz2006/DroneDeliverySim) → `navigation-stack/` (simulation packages)
 
 ### ⚠️ Important: Accessing Old Branches and Large Files
 
@@ -156,3 +176,4 @@ The following large files are stored in Git LFS and were **not** included in the
 - [ROS 2 Documentation](https://docs.ros.org/en/humble/)
 - [PX4 Autopilot](https://px4.io/)
 - [Gazebo Simulation](https://gazebosim.org/)
+- [DroneDeliverySim (original)](https://github.com/Ymz2006/DroneDeliverySim)
